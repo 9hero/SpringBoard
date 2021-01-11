@@ -15,4 +15,9 @@ public class MemberDAO {
 		return sql.insert("member.join",mib);
 	}
 
+	public String idCheck(String id) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("member.idCheck", id);
+	}
+
 }

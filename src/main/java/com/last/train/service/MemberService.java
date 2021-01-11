@@ -23,4 +23,9 @@ public class MemberService {
 		}
 		return results;
 	}
+
+	public String idCheck(String id) {
+		String checkedId = mdao.idCheck(id);
+		return checkedId;
+	}
 }
