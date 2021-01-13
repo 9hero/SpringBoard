@@ -31,5 +31,9 @@ public class MemberController {
 		System.out.println("idCheck 중복 결과값" + checkedId);
 		return checkedId;
 	}
-	
+	@RequestMapping(value="/boardList")
+	public ModelAndView boardList() {
+		mav=msvc.boardList();
+		return mav;
+	}
 }
