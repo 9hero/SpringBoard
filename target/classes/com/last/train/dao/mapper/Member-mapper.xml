@@ -9,7 +9,10 @@
 	<select id="idCheck" parameterType="String" resultType="String">
 		SELECT USERID FROM MBMEMBER WHERE USERID = #{inputedId}
 	</select>
-	<select id="boardList" resultType="memDTO">
-		
+	<select id="login" parameterType="memDTO" resultType="memDTO">
+		SELECT USERID,USERPWD,USERNAME,
+		USERBIRTH,USEREMAIL,USERADRESS,USERPHONE,
+		USERPROFILE AS userProfileName FROM MBMEMBER WHERE
+		USERID = #{userId} AND USERPWD = #{userPwd}
 	</select>
  </mapper>

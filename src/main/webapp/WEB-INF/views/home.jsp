@@ -47,12 +47,12 @@ width: 199px;
             <button type="button" onclick="doJoinBtn()">create</button>
             <p class="message">Already registered? <a href="#">Sign In</a></p>
           </form>
-          <form class="login-form" action="doLogin">
+          <form class="login-form" action="doLogin" method="get">
             <p>어서와요! 기다리고 있었다고요!</p>
             <input type="text" placeholder="아이디" name="userId">
             <input type="password" placeholder="비밀번호" name="userPwd">
             <button>login</button>
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
+            <p class="message">회원이 아니십니까? <a href="#">그렇다면 가입하세요!</a></p>
           </form>
         </div>
       </div>

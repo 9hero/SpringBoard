@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.last.train.dao.MemberDAO;
+
 import com.last.train.dto.MemberDTO;
 import com.last.train.service.MemberService;
 
@@ -20,6 +20,12 @@ public class MemberController {
 	MemberService msvc;
 	
 	ModelAndView mav;
+	
+	@RequestMapping(value="/doLogin")
+	public String doLogin(@ModelAttribute MemberDTO mib){
+		String goBoardList = msvc.doLogin(mib);
+		return goBoardList;
+	}
 	
 	@RequestMapping(value="/doJoin")
 	public ModelAndView doJoin(@ModelAttribute MemberDTO mib) throws IllegalStateException, IOException {
@@ -33,9 +39,5 @@ public class MemberController {
 		System.out.println("idCheck 중복 결과값" + checkedId);
 		return checkedId;
 	}
-	@RequestMapping(value="/boardList")
-	public ModelAndView boardList() {
-		mav=msvc.boardList();
-		return mav;
-	}
+
 }

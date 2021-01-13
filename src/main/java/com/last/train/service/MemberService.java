@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,10 +16,12 @@ import com.last.train.dto.MemberDTO;
 
 @Service
 public class MemberService {
+	ModelAndView mav;
 	@Autowired
 	MemberDAO mdao;
 	
-	ModelAndView mav;
+	@Autowired
+	HttpSession session;
 	
 	public ModelAndView doJoin(MemberDTO mib) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
@@ -49,11 +53,16 @@ public class MemberService {
 		return checkedId;
 	}
 
-	public ModelAndView boardList() {
-		mav = new ModelAndView();
-		List<MemberDTO> boardList = mdao.boardList();
-		mav.addObject("boardList", boardList);
-		mav.setViewName("BoardList");
-		return mav;
+
+	public String doLogin(MemberDTO mib) {
+		String destination = null;
+		MemberDTO userInfo = mdao.doLogin(mib);
+		if(userInfo != null) {
+		session.setAttribute("userName", userInfo.getUserName());
+		destination = "redirect:/BoardList";
+		}else {
+			destination = "Fail";
+		}
+		return destination;
 	}
 }

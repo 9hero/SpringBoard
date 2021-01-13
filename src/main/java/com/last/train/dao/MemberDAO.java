@@ -24,9 +24,9 @@ public class MemberDAO {
 		return sql.selectOne("member.idCheck", id);
 	}
 
-	public List<MemberDTO> boardList() {
+	public MemberDTO doLogin(MemberDTO mib) {
 		// TODO Auto-generated method stub
-		return sql.selectList("member.boardList");
+		return sql.selectOne("member.login",mib);
 	}
 
 }
