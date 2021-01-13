@@ -14,7 +14,7 @@ public class MemberDAO {
 	@Autowired
 	SqlSessionTemplate sql;
 	
-	public int doJoin(MemberDAO mib) {
+	public int doJoin(MemberDTO mib) {
 		// TODO Auto-generated method stub
 		return sql.insert("member.join",mib);
 	}

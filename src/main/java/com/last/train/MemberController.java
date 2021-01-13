@@ -1,5 +1,7 @@
 package com.last.train;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.last.train.dao.MemberDAO;
+import com.last.train.dto.MemberDTO;
 import com.last.train.service.MemberService;
 
 @Controller
@@ -18,11 +21,10 @@ public class MemberController {
 	
 	ModelAndView mav;
 	
-	@RequestMapping(value="/DoJoin")
-	public String doJoin(@ModelAttribute MemberDAO mib) {
-		String result= null;
-		result = msvc.doJoin(mib); 
-		return result;
+	@RequestMapping(value="/doJoin")
+	public ModelAndView doJoin(@ModelAttribute MemberDTO mib) throws IllegalStateException, IOException {
+		mav = msvc.doJoin(mib); 
+		return mav;
 	}
 	
 	@RequestMapping(value="/idCheck")

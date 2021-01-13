@@ -4,7 +4,7 @@
  
  <mapper namespace="member"> 
 	<insert id="join" parameterType="memDTO">
-		INSERT INTO MBMEMBER VALUES(#{userId},#{userPwd},#{userName},#{userBirth},#{userEmail},#{userAdress},#{userPhone},#{userProfile})
+		INSERT INTO MBMEMBER VALUES(#{userId},#{userPwd},#{userName},#{userBirth},#{userEmail},#{userAdress},#{userPhone},#{userProfileName})
 	</insert>
 	<select id="idCheck" parameterType="String" resultType="String">
 		SELECT USERID FROM MBMEMBER WHERE USERID = #{inputedId}

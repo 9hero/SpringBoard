@@ -1,5 +1,7 @@
 package com.last.train.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,5 +13,6 @@ public class MemberDTO {
 	private String userEmail;
 	private String userAdress;
 	private String userPhone;
-	private String userProfile;
+	private String userProfileName;	
+	private MultipartFile userProfile;
 }

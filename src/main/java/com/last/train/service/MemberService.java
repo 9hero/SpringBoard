@@ -1,9 +1,12 @@
 package com.last.train.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.last.train.dao.MemberDAO;
@@ -16,15 +19,29 @@ public class MemberService {
 	
 	ModelAndView mav;
 	
-	public String doJoin(MemberDAO mib) {
-		String results = null;
+	public ModelAndView doJoin(MemberDTO mib) throws IllegalStateException, IOException {
+		mav = new ModelAndView();
+		MultipartFile userProfile = mib.getUserProfile();
+		String userProfileName = userProfile.getOriginalFilename();
+		userProfileName = System.currentTimeMillis() + "_" + userProfileName;
+		
+		String savePath =
+		"C:\\Users\\rngnl\\Desktop\\스프링\\spring_workspace\\bmTable\\src\\main\\webapp\\resources\\MemberProfile\\"+userProfileName;
+		
+		if(!userProfile.isEmpty()) {
+			userProfile.transferTo(new File(savePath));
+		}
+		mib.setUserProfileName(userProfileName);
+		
+		
 		int result  = mdao.doJoin(mib);
 		if(result>0) {
-			results = "home";
+			mav.addObject("joinDone", "wellDone");
+			mav.setViewName("home");
 		}else {
-			results = "Fail";
+			mav.setViewName("Fail");
 		}
-		return results;
+		return mav;
 	}
 
 	public String idCheck(String id) {

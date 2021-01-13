@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@ width: 199px;
 <body>
     <div class="login-page">
         <div class="form">
-          <form class="register-form" name="reg-from" action="doJoin" method="post" enctype="multipart/form-data">
+          <form class="register-form" name="regfrom" action="doJoin" method="post" enctype="multipart/form-data">
             <p>환영 해요!</p>
             
             <div><input type="text"  placeholder="아이디(필수)" name="userId" id="userId" onkeyup="changedID()"/>
@@ -55,6 +56,10 @@ width: 199px;
           </form>
         </div>
       </div>
+      <c:if test="${joinDone eq 'wellDone'}">
+      	<script>alert('회원가입 감사합니다.');</script>
+      </c:if>
+      
 </body>
 <script>
 $('.message a').click(function(){
@@ -145,7 +150,8 @@ function doJoinBtn(){
 	console.log('상태!'+passformOK );
 	console.log('상태!'+passConfirmOK);
 	if(idCheckOK && passformOK && passConfirmOK){
-		console.log('유효성 검사들 성공');	
+		console.log('유효성 검사들 성공');
+		regfrom.submit();
 	}else if(idCheckOK == false){
 		alert('아이디 중복검사를 해주세요!');
 	}else if(passformOK == false || passConfirmOK == false){
