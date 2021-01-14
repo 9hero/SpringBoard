@@ -28,4 +28,16 @@ public class BoardService {
 		return mav;
 	}
 
+	public ModelAndView boardView(String bnum) {
+		mav = new ModelAndView();
+		BoardDTO BoardInfo = bdao.getBoardContents(bnum);
+		if(BoardInfo != null) {
+			mav.addObject("BoardInfo", BoardInfo);
+			mav.setViewName("board/BoardView");
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
+	}
+
 }

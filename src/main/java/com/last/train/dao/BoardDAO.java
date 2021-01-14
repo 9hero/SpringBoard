@@ -17,6 +17,10 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return sql.selectList("board.List");
 	}
-	
-	
+
+	public BoardDTO getBoardContents(String bnum) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.View",bnum);
+	}
+
 }

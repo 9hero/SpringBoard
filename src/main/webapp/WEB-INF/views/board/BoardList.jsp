@@ -6,14 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="js/bootstrap.js"></script>
+<style>
+#tableContents{
+width: 80%;
+margin: auto;
+height: 500px;
+}
+</style>
 </head>
 <body>
 <h1>보드 리스트</h1>
-	
+	<div id="tableContents">
 	<table class="table table-striped">
-		<tr style="text-align: center;">
+		<tr>
 			<th>게시판번호</th>
 			<th>작성자</th>
 			<th>제목</th>			
@@ -21,8 +28,7 @@
 			<th>조회수</th>			
 		</tr>
 			<c:forEach items="${BoardList}" var ="list">
-			<tr style="text-align: center;">
-				
+			<tr>				
 				<td>${list.BNUMBER}</td>
 				<td>${list.BWRITER}</td>
 				<td><a href="boardView?bnum=${list.BNUMBER}">${list.BTITLES}</a></td>
@@ -40,7 +46,7 @@
 	<input type="text" name="serach">
 	<button type="submit">검색</button>
 	</form>
-	
+	</div>
 </body>
 
 </html>

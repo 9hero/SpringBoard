@@ -6,6 +6,9 @@
 	<select id="List" resultType="boardDTO">
 		SELECT * FROM SPBOARD
 	</select>
+	<select id="View" parameterType="String" resultType="boardDTO">
+		SELECT * FROM SPBOARD WHERE BNUMBER = #{BNUMBER}
+	</select>
  </mapper>
  
  
