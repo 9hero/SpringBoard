@@ -59,6 +59,7 @@ public class MemberService {
 		MemberDTO userInfo = mdao.doLogin(mib);
 		if(userInfo != null) {
 		session.setAttribute("userName", userInfo.getUserName());
+		session.setAttribute("userID", userInfo.getUserId());
 		destination = "redirect:/BoardList";
 		}else {
 			destination = "Fail";

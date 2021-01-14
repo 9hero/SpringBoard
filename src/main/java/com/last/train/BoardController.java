@@ -5,18 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.last.train.service.MemberService;
+import com.last.train.service.BoardService;
 
 @Controller
 public class BoardController {
 	@Autowired
-	MemberService msvc;
+	BoardService bsvc;
 	
 	ModelAndView mav;
 	
 	@RequestMapping(value="/BoardList")
-	public String boardList() {
-		String test= "board/BoardList";
-		return test;
+	public ModelAndView boardList() {
+		mav = bsvc.boardList();
+		return mav;
 	}
 }

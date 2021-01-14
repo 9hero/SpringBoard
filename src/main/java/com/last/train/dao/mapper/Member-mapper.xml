@@ -14,5 +14,5 @@
 		USERBIRTH,USEREMAIL,USERADRESS,USERPHONE,
 		USERPROFILE AS userProfileName FROM MBMEMBER WHERE
 		USERID = #{userId} AND USERPWD = #{userPwd}
-	</select>
+	</select>	
  </mapper>
