@@ -28,4 +28,9 @@ public class BoardDAO {
 		return sql.update("board.Modi", modiInfo);
 	}
 
+	public int boardDel(String bnum) {
+		// TODO Auto-generated method stub
+		return sql.delete("board.Delete",bnum);
+	}
+
 }

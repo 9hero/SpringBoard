@@ -58,8 +58,14 @@ public class BoardService {
 	}
 	
 	public ModelAndView boardDel(String bnum) {
-		// TODO Auto-generated method stub
-		return null;
+		mav = new ModelAndView();		
+		int DelResult  = bdao.boardDel(bnum);
+		if(DelResult>0) {
+			mav.setViewName("redirect:/BoardList");
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
 	}
 
 }

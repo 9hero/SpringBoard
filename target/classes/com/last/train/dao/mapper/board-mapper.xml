@@ -12,6 +12,9 @@
 	<update id="Modi" parameterType="boardDTO">
 		UPDATE SPBOARD SET BTITLES = #{BTITLES}, BCONTENTS = #{BCONTENTS} WHERE BNUMBER = #{BNUMBER}
 	</update>
+	<delete id="Delete" parameterType="String">
+		DELETE SPBOARD WHERE BNUMBER = #{BNUMBER}
+	</delete>
  </mapper>
  
  
