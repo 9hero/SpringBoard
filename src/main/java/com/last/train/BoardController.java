@@ -2,10 +2,12 @@ package com.last.train;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.last.train.dto.BoardDTO;
 import com.last.train.service.BoardService;
 
 @Controller
@@ -23,6 +25,21 @@ public class BoardController {
 	@RequestMapping(value="/boardView")
 	public ModelAndView boardView(@RequestParam("bnum") String bnum) {
 		mav = bsvc.boardView(bnum); 
+		return mav;
+	}
+	@RequestMapping(value="/boardModi")
+	public ModelAndView boardModi(@RequestParam("bnum") String bnum) {
+		mav = bsvc.boardModi(bnum); 
+		return mav;
+	}
+	@RequestMapping(value="/boardModify")
+	public ModelAndView boardModify(@ModelAttribute BoardDTO modiInfo) {
+		mav = bsvc.boardModify(modiInfo); 
+		return mav;
+	}
+	@RequestMapping(value="/boardDel")
+	public ModelAndView boardDel(@RequestParam("bnum") String bnum) {
+		mav = bsvc.boardDel(bnum); 
 		return mav;
 	}
 }

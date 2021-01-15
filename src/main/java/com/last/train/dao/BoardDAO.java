@@ -23,4 +23,9 @@ public class BoardDAO {
 		return sql.selectOne("board.View",bnum);
 	}
 
+	public int boardModify(BoardDTO modiInfo) {
+		System.out.println(modiInfo+"DAO");
+		return sql.update("board.Modi", modiInfo);
+	}
+
 }

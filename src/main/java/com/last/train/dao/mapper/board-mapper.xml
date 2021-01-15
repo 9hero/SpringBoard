@@ -9,6 +9,9 @@
 	<select id="View" parameterType="String" resultType="boardDTO">
 		SELECT * FROM SPBOARD WHERE BNUMBER = #{BNUMBER}
 	</select>
+	<update id="Modi" parameterType="boardDTO">
+		UPDATE SPBOARD SET BTITLES = #{BTITLES}, BCONTENTS = #{BCONTENTS} WHERE BNUMBER = #{BNUMBER}
+	</update>
  </mapper>
  
  

@@ -40,4 +40,26 @@ public class BoardService {
 		return mav;
 	}
 
+	public ModelAndView boardModi(String bnum) {
+		mav = boardView(bnum);		
+		mav.setViewName("board/BoardModiForm");
+		//사용자가 상세보기 페이지에서 수정을 눌렀을 때 관리자가 삭제한 상태라면 오류
+		return mav;
+	}
+
+	public ModelAndView boardModify(BoardDTO modiInfo) {		
+		int UpdateResult = bdao.boardModify(modiInfo);
+		if(UpdateResult>0) {
+			mav = boardView(modiInfo.getBNUMBER());
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
+	}
+	
+	public ModelAndView boardDel(String bnum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

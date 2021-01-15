@@ -8,7 +8,6 @@ import lombok.Data;
 public class BoardDTO {
 	private String BNUMBER;
 	private String BWRITER;
-	private String BPASSWORD;
 	private String BTITLES;
 	private String BCONTENTS;
 	private String BDATE;
