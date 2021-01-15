@@ -37,6 +37,7 @@ height: 500px;
 			</tr>
 			</c:forEach>	
 	</table>
+	<a href="goWriteForm" class="button">글쓰기</a>
 	<h2>검색</h2>
 	<form action="bsearch">
 		<select name="selectbox">

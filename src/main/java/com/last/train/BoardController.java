@@ -1,5 +1,7 @@
 package com.last.train;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +42,16 @@ public class BoardController {
 	@RequestMapping(value="/boardDel")
 	public ModelAndView boardDel(@RequestParam("bnum") String bnum) {
 		mav = bsvc.boardDel(bnum); 
+		return mav;
+	}	
+	@RequestMapping(value="/goWriteForm")
+	public String boardWrite() {
+		
+		return "board/BoardWrite";
+	}
+	@RequestMapping(value="/boardWrite")
+	public ModelAndView boardWrite(@ModelAttribute BoardDTO WriteInfo) throws IllegalStateException, IOException {
+		mav = bsvc.boardWrite(WriteInfo); 
 		return mav;
 	}
 }

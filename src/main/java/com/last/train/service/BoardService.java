@@ -1,9 +1,12 @@
 package com.last.train.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.last.train.dao.BoardDAO;
@@ -61,6 +64,26 @@ public class BoardService {
 		mav = new ModelAndView();		
 		int DelResult  = bdao.boardDel(bnum);
 		if(DelResult>0) {
+			mav.setViewName("redirect:/BoardList");
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
+	}
+
+	public ModelAndView boardWrite(BoardDTO writeInfo) throws IllegalStateException, IOException {
+		mav = new ModelAndView();
+		MultipartFile bfile = writeInfo.getBFILE();
+		String bFileName = bfile.getOriginalFilename();
+		bFileName = System.currentTimeMillis() + "_" + bFileName;//구분용 현재시간ms단위로 앞에 추가
+		String savePath = "C:\\Users\\rngnl\\Desktop\\스프링\\spring_workspace\\bmTable\\src\\main\\webapp\\resources\\BoardFile\\"+bFileName;		
+		if(!bfile.isEmpty()) {
+			bfile.transferTo(new File(savePath));
+			
+		}writeInfo.setBFILENAME(bFileName);
+		
+		int InsertResult = bdao.boardWrite(writeInfo);
+		if(InsertResult>0) {
 			mav.setViewName("redirect:/BoardList");
 		}else {
 			mav.setViewName("Fail");

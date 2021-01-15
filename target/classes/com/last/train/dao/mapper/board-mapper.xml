@@ -15,6 +15,10 @@
 	<delete id="Delete" parameterType="String">
 		DELETE SPBOARD WHERE BNUMBER = #{BNUMBER}
 	</delete>
+	<insert id="Write" parameterType="boardDTO">
+		INSERT INTO SPBOARD (BNUMBER,BWRITER,BTITLES,BCONTENTS,BDATE,BHITS,BFILE) 
+		VALUES(BNUM.NEXTVAL,#{BWRITER},#{BTITLES},#{BCONTENTS},SYSDATE,0,#{BFILENAME})
+	</insert>
  </mapper>
  
  

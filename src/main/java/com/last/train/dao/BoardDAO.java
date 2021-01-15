@@ -33,4 +33,10 @@ public class BoardDAO {
 		return sql.delete("board.Delete",bnum);
 	}
 
+	public int boardWrite(BoardDTO writeInfo) {
+		// TODO Auto-generated method stub
+		System.out.println(writeInfo +"DAO");
+		return sql.insert("board.Write",writeInfo);
+	}
+
 }
