@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.last.train.dao.BoardDAO;
 import com.last.train.dto.BoardDTO;
+import com.last.train.dto.PageDTO;
 
 @Service
 public class BoardService {
@@ -88,6 +89,43 @@ public class BoardService {
 		}else {
 			mav.setViewName("Fail");
 		}
+		return mav;
+	}
+	
+	private static final int rowPP = 10; //rowPerPage
+	private static final int pbuttonPP = 5; //pageButtomPerPage
+	public ModelAndView boardlistpage(int page) {
+		mav = new ModelAndView();
+		PageDTO pto = new PageDTO();
+		
+		int totalRowNum= bdao.getCountRow();
+		//1~10번째의 글, 11~20번째의 글 가져오기
+		// 페이지 당 글갯수에 맞춰 가져올 범위중 낮은 숫자 1,11,21.....
+		int gRow_lo = (page-1)*rowPP+1; //getRow_lowRange
+		pto.setGRow_lo(gRow_lo);
+		// 가져올 범위중 높은 숫자 10,20,30......
+		int gRow_Hi = page*rowPP; //getRow_HighRange
+		pto.setGRow_Hi(gRow_Hi);
+		
+		//해당 범위에 맞는 게시글 가져오기
+		List<BoardDTO> boardList = bdao.getBoardPaged(pto);
+		
+		//마지막 페이지계산 이이상 게시글없음
+		int lastPage = (int)Math.ceil((double)totalRowNum/(double)rowPP);
+		
+		//페이지 버튼 계산 페이지당 5페이지버튼 1~5,6~10,11~15....
+		int pageBtnStart = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP-pbuttonPP+1; //1,6,11버튼
+		int pageBtnEnd = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP; // 5,10,15...마지막
+		
+		pto.setLastPage(lastPage);
+		pto.setPage(page);
+		pto.setPageBtnStart(pageBtnStart);
+		pto.setPageBtnEnd(pageBtnEnd);
+		
+		mav.addObject("BoardList", boardList);
+		mav.addObject("page",pto);
+		mav.setViewName("board/BoardPage");
+		
 		return mav;
 	}
 

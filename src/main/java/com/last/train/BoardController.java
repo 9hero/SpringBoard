@@ -54,4 +54,11 @@ public class BoardController {
 		mav = bsvc.boardWrite(WriteInfo); 
 		return mav;
 	}
+	@RequestMapping(value="/PageList")
+	public ModelAndView boardlistpage(@RequestParam (value="page", required=false,defaultValue="1") int page){
+		
+		mav = bsvc.boardlistpage(page);
+		
+		return mav;
+	}
 }

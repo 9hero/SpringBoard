@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.train.dto.BoardDTO;
+import com.last.train.dto.PageDTO;
 
 @Repository
 public class BoardDAO {
@@ -37,6 +38,16 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		System.out.println(writeInfo +"DAO");
 		return sql.insert("board.Write",writeInfo);
+	}
+
+	public int getCountRow() {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.CountRow");
+	}
+
+	public List<BoardDTO> getBoardPaged(PageDTO pto) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.PagedList",pto);
 	}
 
 }
