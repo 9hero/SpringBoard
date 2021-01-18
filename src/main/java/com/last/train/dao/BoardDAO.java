@@ -58,12 +58,18 @@ public class BoardDAO {
 		return sql.update("board.upHit",bnum);
 	}
 	
-	public List<BoardDTO> boardSearch(String type,String sWord) {
-		Map<String, String> searchMap = new HashMap<String, String>();
-		searchMap.put("type", type);
-		searchMap.put("word", sWord);
+	public List<BoardDTO> boardSearch(Map<String, Object> searchMap) {
+		// TODO Auto-generated method stub
 		return sql.selectList("board.search",searchMap);
 	}
+
+	public int CountSearch(Map<String, Object> searchMap) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.countSearch",searchMap);
+	}
+
+
+
 		
 		
 }

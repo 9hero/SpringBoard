@@ -29,7 +29,11 @@
 		UPDATE SPBOARD SET BHITS = BHITS+1 WHERE BNUMBER = #{BNUM}
 	</update>
 	<select id="search" parameterType="java.util.HashMap" resultType="boardDTO">
-		SELECT * FROM SPBOARD WHERE <include refid="searchType"></include>		
+		SELECT * FROM (SELECT SPBOARD.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC) AS RN 
+		FROM SPBOARD WHERE <include refid="searchType"></include>) WHERE RN BETWEEN #{RL} AND #{RH}		
+	</select>
+	<select id="countSearch" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*) FROM SPBOARD WHERE <include refid="searchType"></include>
 	</select>
 	<sql id="searchType">
 		<choose>
@@ -39,6 +43,7 @@
 			<when test="type == 't+c'">BCONTENTS LIKE '%'||#{word}||'%' OR BTITLES LIKE '%'||#{word}||'%'</when>
 		</choose>
 	</sql>
+
  </mapper>
  
  

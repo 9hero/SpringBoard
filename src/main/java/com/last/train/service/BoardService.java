@@ -2,7 +2,9 @@ package com.last.train.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,55 +94,67 @@ public class BoardService {
 		}
 		return mav;
 	}
-	
 	private static final int rowPP = 10; //rowPerPage 페이지 당 게시글 갯수
 	private static final int pbuttonPP = 5; //pageButtomPerPage 페이지 버튼 갯수 1~5, 6~10
-	public ModelAndView boardlistpage(int page) {
-		mav = new ModelAndView();
+	public PageDTO paging(int totalRowNum,int page) {
 		PageDTO pto = new PageDTO();
-		
-		int totalRowNum= bdao.getCountRow();
-		//1~10번째의 글, 11~20번째의 글 가져오기
-		// 페이지 당 글갯수에 맞춰 가져올 범위중 낮은 숫자 1,11,21.....
 		int gRow_lo = (page-1)*rowPP+1; //getRow_lowRange
 		pto.setGRow_lo(gRow_lo);
 		// 가져올 범위중 높은 숫자 10,20,30......
 		int gRow_Hi = page*rowPP; //getRow_HighRange
 		pto.setGRow_Hi(gRow_Hi);
-		
-		//해당 범위에 맞는 게시글 가져오기
-		List<BoardDTO> boardList = bdao.getBoardPaged(pto);
-		
-		//마지막 페이지계산 이이상 게시글없음
 		int lastPage = (int)Math.ceil((double)totalRowNum/(double)rowPP);
 		pto.setLastPage(lastPage);
-	
-		//페이지 버튼 계산 페이지당 5페이지버튼 1~5,6~10,11~15....
 		int pageBtnStart = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP-pbuttonPP+1; //1,6,11버튼
-		int pageBtnEnd = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP; // 5,10,15...마지막
+		int pageBtnEnd = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP; // 5,10,15...마지막		
 		pto.setPageBtnStart(pageBtnStart);
 		pto.setPageBtnEnd(pageBtnEnd);
 		if(pageBtnEnd >= lastPage) {
 			pto.setPageBtnEnd(lastPage);
-		}
-		pto.setPage(page);
-		
+		}pto.setPage(page);
+		return pto;
+	}
+
+	public ModelAndView boardlistpage(int page) {
+		mav = new ModelAndView();
+		int totalRowNum= bdao.getCountRow();
+		PageDTO pto = paging(totalRowNum,page);
+		List<BoardDTO> boardList = bdao.getBoardPaged(pto);
+		if(boardList != null) {
 		mav.addObject("BoardList", boardList);
 		mav.addObject("page",pto);
 		mav.setViewName("board/BoardPage");
-		
+		}else{
+			mav.setViewName("Fail");
+		}
 		return mav;
 	}
 
-	public ModelAndView Boardsearch(String type, String sWord) {
-		mav = new ModelAndView();				
-		List<BoardDTO> list= bdao.boardSearch(type,sWord);
-		if(list != null) {
-		mav.addObject("BoardList", list);
-		mav.setViewName("board/BoardList");
+	public ModelAndView Boardsearch(int page, String type, String sWord) {
+		mav = new ModelAndView();
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		
+		searchMap.put("type", type);
+		searchMap.put("word", sWord);
+		int totalRowNum = bdao.CountSearch(searchMap);
+		
+		if(totalRowNum>0) {
+			PageDTO pto = paging(totalRowNum,page);	
+			searchMap.put("RL", pto.getGRow_lo());
+			searchMap.put("RH", pto.getGRow_Hi());
+			
+			List<BoardDTO> list= bdao.boardSearch(searchMap);
+			
+			if(list != null) {
+			mav.addObject("page",pto);
+			mav.addObject("BoardList", list);
+			mav.setViewName("board/BoardPage");
+			}else {
+				mav.setViewName("Fail");
+			}
 		}else {
-			mav.setViewName("Fail");
-		}
+			mav.setViewName("board/BoardList");
+		}		
 		return mav;
 	}
 
