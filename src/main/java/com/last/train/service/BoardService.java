@@ -35,7 +35,8 @@ public class BoardService {
 	public ModelAndView boardView(String bnum) {
 		mav = new ModelAndView();
 		BoardDTO BoardInfo = bdao.getBoardContents(bnum);
-		if(BoardInfo != null) {
+		int hit = bdao.viewHit(bnum);
+		if(BoardInfo != null && hit>0) {			
 			mav.addObject("BoardInfo", BoardInfo);
 			mav.setViewName("board/BoardView");
 		}else {
@@ -128,6 +129,18 @@ public class BoardService {
 		mav.addObject("page",pto);
 		mav.setViewName("board/BoardPage");
 		
+		return mav;
+	}
+
+	public ModelAndView Boardsearch(String type, String sWord) {
+		mav = new ModelAndView();				
+		List<BoardDTO> list= bdao.boardSearch(type,sWord);
+		if(list != null) {
+		mav.addObject("BoardList", list);
+		mav.setViewName("board/BoardList");
+		}else {
+			mav.setViewName("Fail");
+		}
 		return mav;
 	}
 

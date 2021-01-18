@@ -25,6 +25,20 @@
 	<select id="PagedList" parameterType="pageDTO" resultType="boardDTO">
 		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC) AS RN FROM SPBOARD B) WHERE RN BETWEEN #{gRow_lo} AND #{gRow_Hi}	
 	</select>
+	<update id="upHit" parameterType="String">		
+		UPDATE SPBOARD SET BHITS = BHITS+1 WHERE BNUMBER = #{BNUM}
+	</update>
+	<select id="search" parameterType="java.util.HashMap" resultType="boardDTO">
+		SELECT * FROM SPBOARD WHERE <include refid="searchType"></include>		
+	</select>
+	<sql id="searchType">
+		<choose>
+			<when test="type == 'contents'">BCONTENTS LIKE '%'||#{word}||'%'</when>
+			<when test="type == 'title'">BTITLES LIKE '%'||#{word}||'%'</when>
+			<when test="type == 'writer'">BWRITER LIKE '%'||#{word}||'%'</when>
+			<when test="type == 't+c'">BCONTENTS LIKE '%'||#{word}||'%' OR BTITLES LIKE '%'||#{word}||'%'</when>
+		</choose>
+	</sql>
  </mapper>
  
  

@@ -1,7 +1,10 @@
 package com.last.train.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,4 +53,17 @@ public class BoardDAO {
 		return sql.selectList("board.PagedList",pto);
 	}
 
+	public int viewHit(String bnum) {
+		// TODO Auto-generated method stub
+		return sql.update("board.upHit",bnum);
+	}
+	
+	public List<BoardDTO> boardSearch(String type,String sWord) {
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("type", type);
+		searchMap.put("word", sWord);
+		return sql.selectList("board.search",searchMap);
+	}
+		
+		
 }

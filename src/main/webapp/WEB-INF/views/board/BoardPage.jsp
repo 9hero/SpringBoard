@@ -39,34 +39,50 @@ height: 500px;
 	</table>
 	<a href="goWriteForm" class="button">글쓰기</a>
 	</div>
-	<c:choose>
-		<c:when test="${page.page eq 1}">
-			[이전]&nbsp;
-		</c:when>
-		<c:otherwise>
-			<a href="BoardPage?page=${page.page-1 }">[이전]</a>&nbsp;
-		</c:otherwise>
-	</c:choose>
-	
-	<c:forEach var = "i" begin="${page.pageBtnStart}" end="${page.pageBtnEnd }" step="1">
-		<c:choose>
-			<c:when test="${i eq page.page}">
-			${i}
-			</c:when>
-			<c:otherwise>
-			<a href="BoardPage?page=${i}">${i}</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	
-	<c:choose>
-		<c:when test="${page.page eq page.lastPage}">
-			[다음]
-		</c:when>
-		<c:otherwise>
-			<a href="BoardPage?page=${page.page+1 }">[다음]</a>
-		</c:otherwise>
-	</c:choose>
+	<div>
+		<div id="pageBtn">
+			<c:choose>
+				<c:when test="${page.page eq 1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="BoardPage?page=${page.page-1 }">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var = "i" begin="${page.pageBtnStart}" end="${page.pageBtnEnd }" step="1">
+				<c:choose>
+					<c:when test="${i eq page.page}">
+					${i}
+					</c:when>
+					<c:otherwise>
+					<a href="BoardPage?page=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${page.page eq page.lastPage}">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="BoardPage?page=${page.page+1 }">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div id="search">
+			<form action="Boardsearch" method="get">
+				<select name="searchType">
+					<option value="title">제목</option>
+					<option value="contents">내용</option>					
+					<option value="writer">작성자</option>
+					<option value="t+c">제목+내용</option>
+				</select>
+				<input type="text" name="searchWord">
+				<button type="submit">검색!</button>
+			</form> 
+		</div>
+	</div>
 </body>
 
 </html>

@@ -59,4 +59,9 @@ public class BoardController {
 		mav = bsvc.boardlistpage(page);		
 		return mav;
 	}
+	@RequestMapping(value="/Boardsearch")
+	public ModelAndView Boardsearch(@RequestParam("searchType") String type,@RequestParam("searchWord") String sWord) {
+		mav = bsvc.Boardsearch(type,sWord);
+		return mav;
+	}
 }

@@ -39,14 +39,18 @@ height: 500px;
 	</table>
 	<a href="goWriteForm" class="button">글쓰기</a>
 	<h2>검색</h2>
-	<form action="bsearch">
-		<select name="selectbox">
-		<option value="title">제목 검색</option>
-		<option value="context">내용 검색</option>
-	</select>
-	<input type="text" name="serach">
-	<button type="submit">검색</button>
-	</form>
+		<div id="search">
+			<form action="Boardsearch" method="get">
+				<select name="searchType">
+					<option value="title">제목</option>
+					<option value="contents">내용</option>					
+					<option value="writer">작성자</option>
+					<option value="t+c">제목+내용</option>
+				</select>
+				<input type="text" name="searchWord">
+				<button type="submit">검색!</button>
+			</form> 
+		</div>
 	</div>
 </body>
 
