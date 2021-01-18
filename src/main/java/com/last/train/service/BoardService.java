@@ -65,7 +65,7 @@ public class BoardService {
 		mav = new ModelAndView();		
 		int DelResult  = bdao.boardDel(bnum);
 		if(DelResult>0) {
-			mav.setViewName("redirect:/BoardList");
+			mav.setViewName("redirect:/BoardPage");
 		}else {
 			mav.setViewName("Fail");
 		}
@@ -85,15 +85,15 @@ public class BoardService {
 		
 		int InsertResult = bdao.boardWrite(writeInfo);
 		if(InsertResult>0) {
-			mav.setViewName("redirect:/BoardList");
+			mav.setViewName("redirect:/BoardPage");
 		}else {
 			mav.setViewName("Fail");
 		}
 		return mav;
 	}
 	
-	private static final int rowPP = 10; //rowPerPage
-	private static final int pbuttonPP = 5; //pageButtomPerPage
+	private static final int rowPP = 10; //rowPerPage 페이지 당 게시글 갯수
+	private static final int pbuttonPP = 5; //pageButtomPerPage 페이지 버튼 갯수 1~5, 6~10
 	public ModelAndView boardlistpage(int page) {
 		mav = new ModelAndView();
 		PageDTO pto = new PageDTO();
@@ -112,15 +112,17 @@ public class BoardService {
 		
 		//마지막 페이지계산 이이상 게시글없음
 		int lastPage = (int)Math.ceil((double)totalRowNum/(double)rowPP);
-		
+		pto.setLastPage(lastPage);
+	
 		//페이지 버튼 계산 페이지당 5페이지버튼 1~5,6~10,11~15....
 		int pageBtnStart = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP-pbuttonPP+1; //1,6,11버튼
 		int pageBtnEnd = (int)Math.ceil((double)page/(double)pbuttonPP)*pbuttonPP; // 5,10,15...마지막
-		
-		pto.setLastPage(lastPage);
-		pto.setPage(page);
 		pto.setPageBtnStart(pageBtnStart);
 		pto.setPageBtnEnd(pageBtnEnd);
+		if(pageBtnEnd >= lastPage) {
+			pto.setPageBtnEnd(lastPage);
+		}
+		pto.setPage(page);
 		
 		mav.addObject("BoardList", boardList);
 		mav.addObject("page",pto);

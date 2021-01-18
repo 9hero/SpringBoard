@@ -19,8 +19,11 @@
 		INSERT INTO SPBOARD (BNUMBER,BWRITER,BTITLES,BCONTENTS,BDATE,BHITS,BFILE) 
 		VALUES(BNUM.NEXTVAL,#{BWRITER},#{BTITLES},#{BCONTENTS},SYSDATE,0,#{BFILENAME})
 	</insert>
-	<select id="CountRow">
+	<select id="CountRow" resultType="int">
 		SELECT COUNT(BNUMBER) FROM SPBOARD
+	</select>
+	<select id="PagedList" parameterType="pageDTO" resultType="boardDTO">
+		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC) AS RN FROM SPBOARD B) WHERE RN BETWEEN #{gRow_lo} AND #{gRow_Hi}	
 	</select>
  </mapper>
  

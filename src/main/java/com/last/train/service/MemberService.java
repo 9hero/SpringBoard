@@ -60,7 +60,7 @@ public class MemberService {
 		if(userInfo != null) {
 		session.setAttribute("userName", userInfo.getUserName());
 		session.setAttribute("userID", userInfo.getUserId());
-		destination = "redirect:/BoardList";
+		destination = "redirect:/BoardPage";
 		}else {
 			destination = "Fail";
 		}
