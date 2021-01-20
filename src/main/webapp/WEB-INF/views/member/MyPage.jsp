@@ -13,12 +13,16 @@
 비밀번호 ${uib.userPwd }
 이름 ${uib.userName }
 생일 ${uib.userBirth }
-${uib.userEmail }
-${uib.userAdress }
-${uib.userPhone }
-${uib.userProfileName}
+이메일 ${uib.userEmail }
+주소 ${uib.userAdress }
+폰 ${uib.userPhone }
+프로필사진 ${uib.userProfileName}
 </div>
 
-<div><a href="">내가 쓴 글</a><a href="">수정하기</a><a href="">회원탈퇴</a></div>
+<div>
+<a href="HaveWrited?uId=${uib.userId }">내가 쓴 글</a>
+<a href="memberModiForm?uId=${uib.userId }">수정하기</a>
+<a href="memDel?uId=${uib.userId }">회원탈퇴</a>
+</div>
 </body>
 </html>

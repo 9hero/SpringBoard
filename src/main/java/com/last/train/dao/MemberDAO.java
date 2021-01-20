@@ -30,7 +30,17 @@ public class MemberDAO {
 
 	public MemberDTO getMyInfo(String uid) {
 		// TODO Auto-generated method stub
-		return sql.selectOne("member.getUserInfo",uid);
+		return sql.selectOne("member.getInfo",uid);
+	}
+
+	public int memDel(String uid) {
+		// TODO Auto-generated method stub
+		return sql.delete("member.delMem",uid);
+	}
+
+	public int memModi(MemberDTO mib) {
+		// TODO Auto-generated method stub
+		return sql.update("member.modi",mib);
 	}
 
 }

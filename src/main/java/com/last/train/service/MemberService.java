@@ -78,4 +78,29 @@ public class MemberService {
 		}
 		return mav;
 	}
+
+	public ModelAndView memDel(String uid) {
+		mav = new ModelAndView();
+		int result = mdao.memDel(uid);
+		if(result>0) {
+			mav.addObject("outDone", "goodBye");
+			mav.setViewName("home");
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
+	}
+
+	public String memModi(MemberDTO mib) {
+		mav = new ModelAndView();
+		String go = null;
+		int result = mdao.memModi(mib);		
+		if(result>0) {
+			go = "home";
+		}else {
+			go = "Fail";
+		}
+		return go;
+	}
+
 }

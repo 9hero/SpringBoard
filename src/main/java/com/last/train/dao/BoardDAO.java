@@ -68,6 +68,16 @@ public class BoardDAO {
 		return sql.selectOne("board.countSearch",searchMap);
 	}
 
+	public int MygetCountRow(String uid) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.myCountRow", uid);
+	}
+
+	public List<BoardDTO> getMyBoardPaged(Map<String, Object> searchMap) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.MyPagedList",searchMap);
+	}
+
 
 
 		

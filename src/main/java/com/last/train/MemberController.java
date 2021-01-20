@@ -44,4 +44,20 @@ public class MemberController {
 		mav = msvc.myPage(uid);
 		return mav;
 	}
+	@RequestMapping(value="/memberModiForm")
+	public ModelAndView memberModiForm(@RequestParam("uId") String uid){
+		mav = msvc.myPage(uid);
+		mav.setViewName("member/MemModiForm");
+		return mav;
+	}
+	@RequestMapping(value="/memDel")
+	public ModelAndView memDel(@RequestParam("uId") String uid){
+		mav = msvc.memDel(uid);
+		return mav;
+	}	
+	@RequestMapping(value="/memModi")
+	public String memModi(@ModelAttribute MemberDTO mib){
+		String modiDone = msvc.memModi(mib);
+		return modiDone;
+	}
 }

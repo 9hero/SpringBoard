@@ -65,5 +65,10 @@ public class BoardController {
 		mav = bsvc.Boardsearch(page,type,sWord);
 		return mav;
 	}
-	
+	@RequestMapping(value="/HaveWrited")
+	public ModelAndView HaveWrited(@RequestParam("uId") String uid,
+			@RequestParam (value="page", required=false,defaultValue="1") int page){
+		mav = bsvc.HaveWrited(page,uid);		
+		return mav;
+	}
 }

@@ -59,6 +59,9 @@ width: 199px;
       <c:if test="${joinDone eq 'wellDone'}">
       	<script>alert('회원가입 감사합니다.');</script>
       </c:if>
+      <c:if test="${outDone eq 'goodBye'}">
+      	<script>alert('탈퇴되었습니다.');</script>
+      </c:if>
       
 </body>
 <script>

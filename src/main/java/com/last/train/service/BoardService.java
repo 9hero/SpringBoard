@@ -158,4 +158,25 @@ public class BoardService {
 		return mav;
 	}
 
+	public ModelAndView HaveWrited(int page ,String uid) {
+		mav = new ModelAndView();
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		
+		int totalRowNum= bdao.MygetCountRow(uid);
+		PageDTO pto = paging(totalRowNum,page);
+		searchMap.put("RL", pto.getGRow_lo());
+		searchMap.put("RH", pto.getGRow_Hi());		
+		searchMap.put("uid", uid);
+		
+		List<BoardDTO> boardList = bdao.getMyBoardPaged(searchMap);
+		if(boardList != null) {
+		mav.addObject("BoardList", boardList);
+		mav.addObject("page",pto);
+		mav.setViewName("board/BoardPage");
+		}else{
+			mav.setViewName("Fail");
+		}
+		return mav;	
+	}
+
 }
