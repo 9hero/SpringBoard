@@ -6,6 +6,6 @@
  		<typeAlias alias="memDTO" type="com.last.train.dto.MemberDTO"/>
  		<typeAlias alias="boardDTO" type="com.last.train.dto.BoardDTO"/>
 		<typeAlias alias="pageDTO" type="com.last.train.dto.PageDTO"/>
-		<!-- <typeAlias alias="commentBean" type="com.hope.board.dto.CommentDTO"/> -->  
+		<typeAlias alias="comDTO" type="com.last.train.dto.CommentDTO"/>  
 	</typeAliases>
 </configuration>

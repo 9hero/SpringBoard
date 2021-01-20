@@ -23,7 +23,8 @@
 		SELECT COUNT(BNUMBER) FROM SPBOARD
 	</select>
 	<select id="PagedList" parameterType="pageDTO" resultType="boardDTO">
-		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC) AS RN FROM SPBOARD B) WHERE RN BETWEEN #{gRow_lo} AND #{gRow_Hi}	
+		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC) AS RN FROM SPBOARD B) 
+		WHERE RN BETWEEN #{gRow_lo} AND #{gRow_Hi}	
 	</select>
 	<update id="upHit" parameterType="String">		
 		UPDATE SPBOARD SET BHITS = BHITS+1 WHERE BNUMBER = #{BNUM}

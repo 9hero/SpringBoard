@@ -65,4 +65,5 @@ public class BoardController {
 		mav = bsvc.Boardsearch(page,type,sWord);
 		return mav;
 	}
+	
 }
