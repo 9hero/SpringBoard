@@ -39,5 +39,9 @@ public class MemberController {
 		System.out.println("idCheck 중복 결과값" + checkedId);
 		return checkedId;
 	}
-
+	@RequestMapping(value="/myPage")
+	public ModelAndView doLogin(@RequestParam("uId") String uid){
+		mav = msvc.myPage(uid);
+		return mav;
+	}
 }

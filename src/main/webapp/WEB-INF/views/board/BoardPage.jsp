@@ -17,6 +17,7 @@ height: 500px;
 </style>
 </head>
 <body>
+<header><div>반가워요! ${userName}<a href="myPage?uId=${userID}">마이페이지</a><a href="logout">로그아웃</a></div></header>
 <h1>보드 리스트</h1>
 	<div id="tableContents">
 	<table class="table table-striped">

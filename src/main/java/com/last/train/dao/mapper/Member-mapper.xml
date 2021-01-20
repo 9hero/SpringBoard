@@ -14,5 +14,11 @@
 		USERBIRTH,USEREMAIL,USERADRESS,USERPHONE,
 		USERPROFILE AS userProfileName FROM MBMEMBER WHERE
 		USERID = #{userId} AND USERPWD = #{userPwd}
+	</select>
+	<select id="getUserInfo" parameterType="String" resultType="memDTO">
+		SELECT USERID,USERPWD,USERNAME,
+		USERBIRTH,USEREMAIL,USERADRESS,USERPHONE,
+		USERPROFILE AS userProfileName FROM MBMEMBER WHERE
+		USERID = #{userId}
 	</select>	
  </mapper>

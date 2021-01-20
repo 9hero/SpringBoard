@@ -1,6 +1,5 @@
 package com.last.train.dao;
 
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,11 @@ public class MemberDAO {
 	public MemberDTO doLogin(MemberDTO mib) {
 		// TODO Auto-generated method stub
 		return sql.selectOne("member.login",mib);
+	}
+
+	public MemberDTO getMyInfo(String uid) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("member.getUserInfo",uid);
 	}
 
 }

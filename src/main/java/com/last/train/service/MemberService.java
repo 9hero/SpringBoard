@@ -66,4 +66,16 @@ public class MemberService {
 		}
 		return destination;
 	}
+
+	public ModelAndView myPage(String uid) {
+		mav = new ModelAndView();
+		MemberDTO userInfo = mdao.getMyInfo(uid);
+		if(userInfo != null) {
+			mav.addObject("uib", userInfo);
+			mav.setViewName("member/MyPage");
+		}else {
+			mav.setViewName("Fail");
+		}
+		return mav;
+	}
 }
